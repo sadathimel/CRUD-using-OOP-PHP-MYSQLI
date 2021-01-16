@@ -31,6 +31,13 @@ if (isset($_POST['submit'])){
 ?>
 
 <?php
+if (isset($_POST['delete'])){
+    $query = "DELETE FROM tbl_user WHERE id=$id";
+    $deleteData = $db->delete($query);
+}
+?>
+
+<?php
 if (isset($error)){
     echo "<span style='color: tomato;'>".$error."</span>";
 }
@@ -55,6 +62,7 @@ if (isset($error)){
                 <td>
                     <input type="submit" name="submit" value="Submit">
                     <input type="reset"  value="Cancel">
+                    <input type="submit" name="delete" value="Delete">
                 </td>
             </tr>
         </table>

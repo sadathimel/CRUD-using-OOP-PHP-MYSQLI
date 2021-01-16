@@ -9,22 +9,31 @@
     $query  = "SELECT * FROM tbl_user";
     $read   = $db->select($query);
 ?>
-
+<?php
+if (isset($_GET['msg'])){
+    echo "<span style='color: green;'>".$_GET['msg']."</span>";
+}
+?>
 <table class="tblone">
     <tr>
-        <th width="30%">Name</th>
-        <th width="30%">Email</th>
-        <th width="20%">Skill</th>
-        <th width="20%">Action</th>
+        <th width="10%">Serial</th>
+        <th width="35%">Name</th>
+        <th width="25%">Email</th>
+        <th width="15%">Skill</th>
+        <th width="15%">Action</th>
     </tr>
 
     <?php if ($read) { ?>
-            <?php while ($row = $read->fetch_assoc()) {?>
+        <?php
+            $i=1;
+            while ($row = $read->fetch_assoc()) {
+        ?>
     <tr>
+        <td><?php echo $i++ ?></td>
         <td><?php echo $row['name']; ?></td>
         <td><?php echo $row['email']; ?></td>
         <td><?php echo $row['skill']; ?></td>
-        <td><a href="update.php?id=<?php echo $row['id']; ?>">Edit</a></td>
+        <td><a href="Update.php?id=<?php echo urldecode($row['id']); ?>">Edit</a></td>
     </tr>
         <?php } ?>
     <?php }else { ?>

@@ -30,7 +30,40 @@ public function select($query) {
         return false;
     }
 }
+// Read Data
 
+public function insert($query) {
+    $insert_row = $this->link->query($query) or die($this->link->error.__LINE__);
+    if ($insert_row) {
+        header("Location: index.php?msg=".urlencode('Data inserted successfully'));
+        exit();
+    }else{
+        die("Error:('.$this->link->errno.')".$this->link->error);
+    }
+}
+//Update Data
+
+public function update($query) {
+    $update_row = $this->link->query($query) or die($this->link->error.__LINE__);
+    if ($update_row) {
+        header("Location: index.php?msg=".urlencode('Data Updated successfully'));
+        exit();
+    }else{
+        die("Error:('.$this->link->errno.')".$this->link->error);
+    }
+}
+
+//Delete Data
+
+    public function delete($query) {
+        $delete_row = $this->link->query($query) or die($this->link->error.__LINE__);
+        if ($delete_row) {
+            header("Location: index.php?msg=".urlencode('Data Delete successfully'));
+            exit();
+        }else{
+            die("Error:('.$this->link->errno.')".$this->link->error);
+        }
+    }
 
 }
 
