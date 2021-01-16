@@ -7,13 +7,22 @@ include 'Database.php';
 <?php
 $db     = new Database();
 if (isset($_POST['submit'])){
-    $name = mysqli_real_escape_string($_POST['name']);
-    $email = mysqli_real_escape_string($_POST['email']);
-    $skill = mysqli_real_escape_string($_POST['skill']);
+    $name = mysqli_real_escape_string($db->link, $_POST['name']);
+    $email = mysqli_real_escape_string($db->link,$_POST['email']);
+    $skill = mysqli_real_escape_string($db->link,$_POST['skill']);
 
     if ($name == "" || $email == "" || $skill == "") {
         $error = "Field must not be Empty !!";
+    }else {
+        $query = "INSERT INTO tbl_user (name, email, skill) VALUES ('$name', '$email', '$skill')";
+        $create = $db->insert($query);
     }
+}
+?>
+
+<?php
+if (isset($error)){
+    echo "<span style='color: tomato;'>".$error."</span>";
 }
 ?>
 
